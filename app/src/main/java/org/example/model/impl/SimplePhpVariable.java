@@ -1,4 +1,7 @@
-package org.example.model;
+package org.example.model.impl;
+
+import org.example.model.PhpDocBlock;
+import org.example.model.PhpVariable;
 
 public final class SimplePhpVariable implements PhpVariable {
     private final String name;

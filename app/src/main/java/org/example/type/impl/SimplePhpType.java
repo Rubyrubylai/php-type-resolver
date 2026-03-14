@@ -1,6 +1,8 @@
-package org.example.type;
+package org.example.type.impl;
 
 import java.util.Objects;
+
+import org.example.type.PhpType;
 
 public final class SimplePhpType implements PhpType {
     private final String name;

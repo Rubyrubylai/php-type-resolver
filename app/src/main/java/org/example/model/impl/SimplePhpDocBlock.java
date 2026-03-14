@@ -1,9 +1,12 @@
-package org.example.model;
+package org.example.model.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import org.example.model.DocTag;
+import org.example.model.PhpDocBlock;
 
 public final class SimplePhpDocBlock implements PhpDocBlock {
     private final List<DocTag> tags;

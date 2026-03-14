@@ -1,9 +1,11 @@
-package org.example.type;
+package org.example.type.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import org.example.type.PhpType;
 
 public final class UnionType implements PhpType {
     private final List<PhpType> types;

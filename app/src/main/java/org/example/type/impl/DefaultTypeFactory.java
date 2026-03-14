@@ -1,6 +1,9 @@
-package org.example.type;
+package org.example.type.impl;
 
 import java.util.List;
+
+import org.example.type.PhpType;
+import org.example.type.TypeFactory;
 
 public final class DefaultTypeFactory implements TypeFactory {
     @Override

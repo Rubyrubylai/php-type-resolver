@@ -5,20 +5,21 @@ import java.util.List;
 import org.example.model.DocTag;
 import org.example.model.PhpDocBlock;
 import org.example.model.PhpVariable;
-import org.example.model.SimpleDocTag;
-import org.example.model.SimplePhpDocBlock;
-import org.example.model.SimplePhpVariable;
+import org.example.model.impl.SimpleDocTag;
+import org.example.model.impl.SimplePhpDocBlock;
+import org.example.model.impl.SimplePhpVariable;
+import org.example.parser.impl.DefaultVarTagParser;
 import org.example.resolver.TypeResolver;
-import org.example.type.DefaultTypeFactory;
 import org.example.type.PhpType;
-import org.example.type.SimplePhpType;
-import org.example.type.UnionType;
+import org.example.type.impl.DefaultTypeFactory;
+import org.example.type.impl.SimplePhpType;
+import org.example.type.impl.UnionType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class AppTest {
-    private final TypeResolver resolver = new TypeResolver(new DefaultTypeFactory());
+    private final TypeResolver resolver = new TypeResolver(new DefaultTypeFactory(), new DefaultVarTagParser());
 
     @Test
     public void inferStandardTypeFromUnnamedVarTag() {
