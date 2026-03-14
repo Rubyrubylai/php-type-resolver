@@ -54,9 +54,15 @@ public class TypeResolver {
         if (matchingNamedTags.size() == 1) {
             return toType(matchingNamedTags.get(0).typeExpression());
         }
+        if (matchingNamedTags.size() > 1) {
+            return mixed;
+        }
 
         if (unnamedTags.size() == 1) {
             return toType(unnamedTags.get(0).typeExpression());
+        }
+        if (unnamedTags.size() > 1) {
+            return mixed;
         }
 
         return mixed;

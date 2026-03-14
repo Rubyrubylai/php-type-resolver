@@ -81,6 +81,129 @@ public class AppTest {
         assertSimpleType(result, "mixed");
     }
 
+    @Test
+    public void fallbackToMixedWhenMultipleNamedTagsMatchVariable() {
+        PhpVariable variable = new SimplePhpVariable(
+                "$id",
+                docBlockWithTags(new SimpleDocTag("var", "int $id"), new SimpleDocTag("var", "string $id")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void fallbackToMixedWhenMultipleUnnamedTagsExistAndNoNamedMatch() {
+        PhpVariable variable = new SimplePhpVariable(
+                "$id",
+                docBlockWithTags(new SimpleDocTag("var", "int"), new SimpleDocTag("var", "string")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedEmptyTagValueReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedMissingTypeWithVariableOnlyReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "$user")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedExtraTokenAfterVariableNameReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable(
+                "$user",
+                docBlockWithTags(new SimpleDocTag("var", "User $user $name")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedWrongTokenOrderReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "$user User")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedUnionWithEmptyMemberReturnsMixed() {
+        PhpVariable variableA = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "|User")));
+        PhpVariable variableB = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "User|")));
+        PhpVariable variableC = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "User||null")));
+
+        assertSimpleType(resolver.inferTypeFromDoc(variableA), "mixed");
+        assertSimpleType(resolver.inferTypeFromDoc(variableB), "mixed");
+        assertSimpleType(resolver.inferTypeFromDoc(variableC), "mixed");
+    }
+
+    @Test
+    public void malformedVariableTokenWithoutDollarReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable("$user", docBlockWithTags(new SimpleDocTag("var", "User user")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedTrailingDescriptionReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable(
+                "$user",
+                docBlockWithTags(new SimpleDocTag("var", "User $user current logged-in user")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedMultipleVariableNamesInOneTagReturnsMixed() {
+        PhpVariable variable = new SimplePhpVariable("$user",
+                docBlockWithTags(new SimpleDocTag("var", "User $user, $name")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
+    @Test
+    public void malformedTagIsIgnoredWhenAnotherValidTagExists() {
+        PhpVariable variable = new SimplePhpVariable(
+                "$user",
+                docBlockWithTags(new SimpleDocTag("var", "$user"), new SimpleDocTag("var", "User $user")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "User");
+    }
+
+    @Test
+    public void malformedUnionWithSpacesIsIgnored() {
+        PhpVariable variable = new SimplePhpVariable(
+                "$user",
+                docBlockWithTags(new SimpleDocTag("var", "User | null $user")));
+
+        PhpType result = resolver.inferTypeFromDoc(variable);
+
+        assertSimpleType(result, "mixed");
+    }
+
     private PhpDocBlock docBlockWithTags(DocTag... tags) {
         return new SimplePhpDocBlock(List.of(tags));
     }
