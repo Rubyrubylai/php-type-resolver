@@ -3,20 +3,22 @@ package org.example.type.impl;
 import java.util.Objects;
 
 import org.example.type.PhpType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class SimplePhpType implements PhpType {
     private final String name;
 
-    public SimplePhpType(String name) {
+    public SimplePhpType(@NotNull String name) {
         this.name = Objects.requireNonNull(name);
     }
 
-    public String getName() {
+    public @NotNull String getName() {
         return name;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(@Nullable Object object) {
         if (this == object) {
             return true;
         }
@@ -32,7 +34,7 @@ public final class SimplePhpType implements PhpType {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return name;
     }
 }

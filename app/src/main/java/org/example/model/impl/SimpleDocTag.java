@@ -1,25 +1,24 @@
 package org.example.model.impl;
 
-import java.util.Objects;
-
 import org.example.model.DocTag;
+import org.jetbrains.annotations.NotNull;
 
 public final class SimpleDocTag implements DocTag {
     private final String name;
     private final String value;
 
-    public SimpleDocTag(String name, String value) {
-        this.name = Objects.requireNonNull(name);
-        this.value = Objects.requireNonNull(value);
+    public SimpleDocTag(@NotNull String name, @NotNull String value) {
+        this.name = name;
+        this.value = value;
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return name;
     }
 
     @Override
-    public String getValue() {
+    public @NotNull String getValue() {
         return value;
     }
 }

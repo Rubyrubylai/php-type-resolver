@@ -1,4 +1,7 @@
 package org.example.parser;
 
-public record ParsedVarTag(String typeExpression, String targetVariableName) {
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+public record ParsedVarTag(@NotNull String typeExpression, @Nullable String targetVariableName) {
 }

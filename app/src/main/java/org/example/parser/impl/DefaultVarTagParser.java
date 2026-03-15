@@ -3,19 +3,16 @@ package org.example.parser.impl;
 import org.example.model.DocTag;
 import org.example.parser.ParsedVarTag;
 import org.example.parser.VarTagParser;
+import org.jetbrains.annotations.Nullable;
 
 public class DefaultVarTagParser implements VarTagParser {
     @Override
-    public ParsedVarTag parse(DocTag docTag) {
+    public @Nullable ParsedVarTag parse(@Nullable DocTag docTag) {
         if (docTag == null) {
             return null;
         }
 
         String raw = docTag.getValue();
-        if (raw == null) {
-            return null;
-        }
-
         String trimmed = raw.trim();
         if (trimmed.isEmpty()) {
             return null;
@@ -43,7 +40,7 @@ public class DefaultVarTagParser implements VarTagParser {
         return new ParsedVarTag(typeExpression, targetVariableName);
     }
 
-    private boolean isValidTypeExpression(String typeExpression) {
+    private boolean isValidTypeExpression(@Nullable String typeExpression) {
         if (typeExpression == null || typeExpression.isEmpty()) {
             return false;
         }
@@ -64,7 +61,7 @@ public class DefaultVarTagParser implements VarTagParser {
         return true;
     }
 
-    private boolean isValidVariableToken(String variableToken) {
+    private boolean isValidVariableToken(@Nullable String variableToken) {
         return variableToken != null && variableToken.matches("^\\$[A-Za-z_][A-Za-z0-9_]*$");
     }
 }

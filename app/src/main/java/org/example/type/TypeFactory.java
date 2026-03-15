@@ -2,8 +2,12 @@ package org.example.type;
 
 import java.util.List;
 
-public interface TypeFactory {
-    PhpType createType(String typeName);
+import org.jetbrains.annotations.NotNull;
 
-    PhpType createUnionType(List<PhpType> types);
+public interface TypeFactory {
+    @NotNull
+    PhpType createType(@NotNull String typeName);
+
+    @NotNull
+    PhpType createUnionType(@NotNull List<PhpType> types);
 }

@@ -10,17 +10,18 @@ import org.example.parser.ParsedVarTag;
 import org.example.parser.VarTagParser;
 import org.example.type.PhpType;
 import org.example.type.TypeFactory;
+import org.jetbrains.annotations.NotNull;
 
 public class TypeResolver {
     private final TypeFactory typeFactory;
     private final VarTagParser varTagParser;
 
-    public TypeResolver(TypeFactory typeFactory, VarTagParser varTagParser) {
+    public TypeResolver(@NotNull TypeFactory typeFactory, @NotNull VarTagParser varTagParser) {
         this.typeFactory = typeFactory;
         this.varTagParser = varTagParser;
     }
 
-    public PhpType inferTypeFromDoc(PhpVariable variable) {
+    public @NotNull PhpType inferTypeFromDoc(@NotNull PhpVariable variable) {
         PhpType mixed = typeFactory.createType("mixed");
         PhpDocBlock docBlock = variable.getDocBlock();
         if (docBlock == null) {
@@ -28,7 +29,7 @@ public class TypeResolver {
         }
 
         List<DocTag> varTags = docBlock.getTagsByName("var");
-        if (varTags == null || varTags.isEmpty()) {
+        if (varTags.isEmpty()) {
             return mixed;
         }
 
@@ -68,7 +69,7 @@ public class TypeResolver {
         return mixed;
     }
 
-    private PhpType toType(String typeExpression) {
+    private @NotNull PhpType toType(@NotNull String typeExpression) {
         String[] rawTypes = typeExpression.split("\\|");
         List<PhpType> types = new ArrayList<>();
         for (String rawType : rawTypes) {

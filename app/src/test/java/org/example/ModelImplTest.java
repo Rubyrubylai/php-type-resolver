@@ -10,7 +10,6 @@ import org.example.model.impl.SimplePhpDocBlock;
 import org.example.model.impl.SimplePhpVariable;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class ModelImplTest {
@@ -35,15 +34,6 @@ public class ModelImplTest {
         assertEquals(2, varTags.size());
         assertEquals("User $user", varTags.get(0).getValue());
         assertEquals("int $id", varTags.get(1).getValue());
-    }
-
-    @Test
-    public void simplePhpDocBlockReturnsEmptyOnNullTagName() {
-        PhpDocBlock docBlock = new SimplePhpDocBlock(List.of(new SimpleDocTag("var", "User")));
-
-        List<DocTag> result = docBlock.getTagsByName(null);
-
-        assertTrue(result.isEmpty());
     }
 
     @Test
