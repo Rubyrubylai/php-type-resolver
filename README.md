@@ -23,7 +23,7 @@ Run from the repository root:
 ## 3. Run tests
 
 ```bash
-./gradlew test
+./gradlew clean test
 ```
 
 This executes all unit tests and prints results in the console.
