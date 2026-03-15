@@ -12,7 +12,7 @@ public class DefaultVarTagParser implements VarTagParser {
             return null;
         }
 
-        String raw = docTag.getValue();
+        String raw = docTag.value();
         String trimmed = raw.trim();
         if (trimmed.isEmpty()) {
             return null;

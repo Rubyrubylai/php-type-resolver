@@ -5,8 +5,8 @@ import org.jetbrains.annotations.Nullable;
 
 public interface PhpVariable {
     @Nullable
-    PhpDocBlock getDocBlock();
+    PhpDocBlock docBlock();
 
     @NotNull
-    String getName();
+    String name();
 }

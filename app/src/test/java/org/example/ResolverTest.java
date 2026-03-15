@@ -38,9 +38,9 @@ public class ResolverTest {
 
         assertTrue(result instanceof UnionType);
         UnionType unionType = (UnionType) result;
-        assertEquals(2, unionType.getTypes().size());
-        assertSimpleType(unionType.getTypes().get(0), "string");
-        assertSimpleType(unionType.getTypes().get(1), "int");
+        assertEquals(2, unionType.types().size());
+        assertSimpleType(unionType.types().get(0), "string");
+        assertSimpleType(unionType.types().get(1), "int");
     }
 
     @Test
@@ -211,6 +211,6 @@ public class ResolverTest {
     private void assertSimpleType(PhpType type, String expectedName) {
         assertTrue(type instanceof SimplePhpType);
         SimplePhpType simplePhpType = (SimplePhpType) type;
-        assertEquals(expectedName, simplePhpType.getName());
+        assertEquals(expectedName, simplePhpType.name());
     }
 }

@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 public interface DocTag {
     @NotNull
-    String getName();
+    String name();
 
     @NotNull
-    String getValue();
+    String value();
 }

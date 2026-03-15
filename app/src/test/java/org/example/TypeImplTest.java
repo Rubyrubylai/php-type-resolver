@@ -31,8 +31,8 @@ public class TypeImplTest {
         UnionType unionType = new UnionType(source);
         source.add(new SimplePhpType("int"));
 
-        assertEquals(1, unionType.getTypes().size());
-        assertEquals(new SimplePhpType("string"), unionType.getTypes().get(0));
+        assertEquals(1, unionType.types().size());
+        assertEquals(new SimplePhpType("string"), unionType.types().get(0));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class TypeImplTest {
         PhpType result = factory.createType("User");
 
         assertTrue(result instanceof SimplePhpType);
-        assertEquals("User", ((SimplePhpType) result).getName());
+        assertEquals("User", ((SimplePhpType) result).name());
     }
 
     @Test
@@ -62,8 +62,8 @@ public class TypeImplTest {
 
         assertTrue(result instanceof UnionType);
         UnionType unionType = (UnionType) result;
-        assertEquals(2, unionType.getTypes().size());
-        assertEquals(new SimplePhpType("string"), unionType.getTypes().get(0));
-        assertEquals(new SimplePhpType("int"), unionType.getTypes().get(1));
+        assertEquals(2, unionType.types().size());
+        assertEquals(new SimplePhpType("string"), unionType.types().get(0));
+        assertEquals(new SimplePhpType("int"), unionType.types().get(1));
     }
 }

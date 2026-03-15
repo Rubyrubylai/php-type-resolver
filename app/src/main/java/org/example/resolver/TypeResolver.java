@@ -23,7 +23,7 @@ public class TypeResolver {
 
     public @NotNull PhpType inferTypeFromDoc(@NotNull PhpVariable variable) {
         PhpType mixed = typeFactory.createType("mixed");
-        PhpDocBlock docBlock = variable.getDocBlock();
+        PhpDocBlock docBlock = variable.docBlock();
         if (docBlock == null) {
             return mixed;
         }
@@ -41,7 +41,7 @@ public class TypeResolver {
             }
         }
 
-        String variableName = variable.getName();
+        String variableName = variable.name();
         List<ParsedVarTag> matchingNamedTags = new ArrayList<>();
         List<ParsedVarTag> unnamedTags = new ArrayList<>();
         for (ParsedVarTag parsedTag : parsedTags) {

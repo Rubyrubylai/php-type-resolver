@@ -18,8 +18,8 @@ public class ModelImplTest {
     public void simpleDocTagExposesNameAndValue() {
         SimpleDocTag tag = new SimpleDocTag("var", "User $user");
 
-        assertEquals("var", tag.getName());
-        assertEquals("User $user", tag.getValue());
+        assertEquals("var", tag.name());
+        assertEquals("User $user", tag.value());
     }
 
     @Test
@@ -32,8 +32,8 @@ public class ModelImplTest {
         List<DocTag> varTags = docBlock.getTagsByName("var");
 
         assertEquals(2, varTags.size());
-        assertEquals("User $user", varTags.get(0).getValue());
-        assertEquals("int $id", varTags.get(1).getValue());
+        assertEquals("User $user", varTags.get(0).value());
+        assertEquals("int $id", varTags.get(1).value());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class ModelImplTest {
         List<DocTag> result = docBlock.getTagsByName("var");
 
         assertEquals(1, result.size());
-        assertEquals("User", result.get(0).getValue());
+        assertEquals("User", result.get(0).value());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ModelImplTest {
         PhpDocBlock docBlock = new SimplePhpDocBlock(List.of(new SimpleDocTag("var", "User")));
         SimplePhpVariable variable = new SimplePhpVariable("$user", docBlock);
 
-        assertEquals("$user", variable.getName());
-        assertSame(docBlock, variable.getDocBlock());
+        assertEquals("$user", variable.name());
+        assertSame(docBlock, variable.docBlock());
     }
 }
