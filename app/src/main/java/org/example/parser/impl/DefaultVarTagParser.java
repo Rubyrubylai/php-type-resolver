@@ -3,15 +3,12 @@ package org.example.parser.impl;
 import org.example.model.DocTag;
 import org.example.parser.ParsedVarTag;
 import org.example.parser.VarTagParser;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class DefaultVarTagParser implements VarTagParser {
     @Override
-    public @Nullable ParsedVarTag parse(@Nullable DocTag docTag) {
-        if (docTag == null) {
-            return null;
-        }
-
+    public @Nullable ParsedVarTag parse(@NotNull DocTag docTag) {
         String raw = docTag.value();
         String trimmed = raw.trim();
         if (trimmed.isEmpty()) {

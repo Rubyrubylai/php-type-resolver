@@ -1,7 +1,6 @@
 package org.example.model.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.example.model.DocTag;
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public record SimplePhpDocBlock(@NotNull List<DocTag> tags) implements PhpDocBlock {
     public SimplePhpDocBlock {
-        tags = Collections.unmodifiableList(new ArrayList<>(tags));
+        tags = List.copyOf(tags);
     }
 
     @Override
