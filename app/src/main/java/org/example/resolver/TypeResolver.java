@@ -45,9 +45,10 @@ public class TypeResolver {
         List<ParsedVarTag> matchingNamedTags = new ArrayList<>();
         List<ParsedVarTag> unnamedTags = new ArrayList<>();
         for (ParsedVarTag parsedTag : parsedTags) {
-            if (parsedTag.targetVariableName() == null) {
+            String targetVariableName = parsedTag.targetVariableName();
+            if (targetVariableName == null) {
                 unnamedTags.add(parsedTag);
-            } else if (parsedTag.targetVariableName().equals(variableName)) {
+            } else if (targetVariableName.equals(variableName)) {
                 matchingNamedTags.add(parsedTag);
             }
         }
